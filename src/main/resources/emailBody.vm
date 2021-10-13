@@ -1,0 +1,7 @@
+<html>
+<body>
+<h1>Zuehlke Software Craftsmanship Focus Group</h1>
+<p>Welcome ${firstName} ${lastName}.</p>
+<p>Thank you for joining the group.</p>
+</body>
+</html>
