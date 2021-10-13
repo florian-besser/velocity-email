@@ -38,12 +38,14 @@ public class VelocityEmailSender {
 
     private static final Logger logger = LoggerFactory.getLogger(VelocityEmailSender.class);
 
-    @Autowired
-    private VelocityEngine velocityEngine;
+    private final VelocityEngine velocityEngine;
+    private final JavaMailSender mailSender;
 
     @Autowired
-    private JavaMailSender mailSender;
-
+    public VelocityEmailSender(VelocityEngine velocityEngine, JavaMailSender mailSender) {
+        this.velocityEngine = velocityEngine;
+        this.mailSender = mailSender;
+    }
 
     /**
      * Sends e-mail using Velocity template for the body and

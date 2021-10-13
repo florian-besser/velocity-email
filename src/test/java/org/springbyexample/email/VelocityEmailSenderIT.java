@@ -17,29 +17,26 @@ package org.springbyexample.email;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import org.apache.velocity.app.VelocityEngine;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@ContextConfiguration
-@ExtendWith(SpringExtension.class)
 public class VelocityEmailSenderIT {
-
-    final Logger logger = LoggerFactory.getLogger(VelocityEmailSenderIT.class);
-
-    @Autowired
-    private final VelocityEmailSender sender = null;
 
     @Test
     public void testMessage() {
+        VelocityEmailSender sender = getVelocityEmailSender();
         SimpleMailMessage msg = getSimpleMailMessage();
 
         assertNotNull(sender, "VelocityEmailSender is null.");
@@ -58,6 +55,25 @@ public class VelocityEmailSenderIT {
         msg.setTo("florian.besser@zuehlke.com");
         msg.setSubject("Greetings from Spring by Example");
         return msg;
+    }
+
+    private VelocityEmailSender getVelocityEmailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+        mailSender.setUsername("cup.asia.software.craftsmanship@gmail.com");
+        mailSender.setPassword("Censored");
+        Properties mailProps = new Properties();
+        mailProps.setProperty("mail.smtp.auth", "true");
+        mailProps.setProperty("mail.smtp.starttls.enable", "true");
+        mailProps.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        mailSender.setJavaMailProperties(mailProps);
+
+        Properties velocityProps = new Properties();
+        velocityProps.setProperty("resource.loader", "class");
+        velocityProps.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        VelocityEngine velocityEngine = new VelocityEngine(velocityProps);
+        return new VelocityEmailSender(velocityEngine, mailSender);
     }
 
 }
