@@ -76,12 +76,6 @@ public class VelocityEmailSender {
                 message.setText(body, true);
             }
         };
-
-        Properties prop = new Properties();
-        prop.setProperty("mail.smtp.auth", "true");
-        prop.setProperty("mail.smtp.starttls.enable", "true");
-        prop.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
-        ((JavaMailSenderImpl) mailSender).setJavaMailProperties(prop);
         mailSender.send(preparator);
 
         logger.info("Sent e-mail to '{}'.", msg.getTo());
