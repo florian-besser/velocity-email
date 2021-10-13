@@ -34,7 +34,7 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VelocityEmailSender implements Sender {
+public class VelocityEmailSender {
 
     private static final Logger logger = LoggerFactory.getLogger(VelocityEmailSender.class);
 
@@ -52,7 +52,6 @@ public class VelocityEmailSender implements Sender {
      * @param msg                The e-mail message to be sent, except for the body.
      * @param hTemplateVariables Variables to use when processing the template.
      */
-    @Override
     public void send(final SimpleMailMessage msg, final Map<String, Object> hTemplateVariables) {
         MimeMessagePreparator preparator = new MimeMessagePreparator() {
             @Override

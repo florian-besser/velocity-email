@@ -39,7 +39,7 @@ public class VelocityEmailSenderIT {
     final Logger logger = LoggerFactory.getLogger(VelocityEmailSenderIT.class);
 
     @Autowired
-    private final Sender sender = null;
+    private final VelocityEmailSender sender = null;
 
     @Autowired
     private final SimpleMailMessage msg = null;
