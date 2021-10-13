@@ -15,20 +15,14 @@
  */
 package org.springbyexample.email;
 
+import org.apache.velocity.app.VelocityEngine;
+import org.junit.jupiter.api.Test;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import org.apache.velocity.app.VelocityEngine;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -62,7 +56,7 @@ public class VelocityEmailSenderIT {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
         mailSender.setUsername("cup.asia.software.craftsmanship@gmail.com");
-        mailSender.setPassword("Censored");
+        mailSender.setPassword("Censored"); // TODO: Change me!
         Properties mailProps = new Properties();
         mailProps.setProperty("mail.smtp.auth", "true");
         mailProps.setProperty("mail.smtp.starttls.enable", "true");
