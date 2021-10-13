@@ -38,10 +38,4 @@
             </props>
         </property>
     </bean>
-
-    <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage"
-          p:from="${mail.username}"
-          p:to="${mail.recipient}"
-          p:subject="Greetings from Spring by Example"/>
-
 </beans>

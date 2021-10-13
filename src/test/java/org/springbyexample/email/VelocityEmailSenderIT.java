@@ -26,9 +26,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -41,11 +38,10 @@ public class VelocityEmailSenderIT {
     @Autowired
     private final VelocityEmailSender sender = null;
 
-    @Autowired
-    private final SimpleMailMessage msg = null;
-
     @Test
     public void testMessage() {
+        SimpleMailMessage msg = getSimpleMailMessage();
+
         assertNotNull(sender, "VelocityEmailSender is null.");
         assertNotNull(msg, "SimpleMailMessage is null.");
 
@@ -54,6 +50,14 @@ public class VelocityEmailSenderIT {
         props.put("lastName", "Smith");
 
         sender.send(msg, props);
+    }
+
+    private SimpleMailMessage getSimpleMailMessage() {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom("cup.asia.software.craftsmanship@gmail.com");
+        msg.setTo("florian.besser@zuehlke.com");
+        msg.setSubject("Greetings from Spring by Example");
+        return msg;
     }
 
 }
