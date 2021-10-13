@@ -19,17 +19,14 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.stereotype.Component;
 
 import java.io.StringWriter;
 import java.util.Map;
 
-@Component
 public class VelocityEmailSender {
 
     private static final Logger logger = LoggerFactory.getLogger(VelocityEmailSender.class);
@@ -37,7 +34,6 @@ public class VelocityEmailSender {
     private final VelocityEngine velocityEngine;
     private final JavaMailSender mailSender;
 
-    @Autowired
     public VelocityEmailSender(VelocityEngine velocityEngine, JavaMailSender mailSender) {
         this.velocityEngine = velocityEngine;
         this.mailSender = mailSender;
